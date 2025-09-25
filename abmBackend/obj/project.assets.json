@@ -4727,11 +4727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\clsanchez\\source\\repos\\abm\\abm.csproj",
+      "projectUniqueName": "C:\\Users\\clsanchez\\source\\repos\\abm\\abmBackend\\abm.csproj",
       "projectName": "abm",
-      "projectPath": "C:\\Users\\clsanchez\\source\\repos\\abm\\abm.csproj",
+      "projectPath": "C:\\Users\\clsanchez\\source\\repos\\abm\\abmBackend\\abm.csproj",
       "packagesPath": "C:\\Users\\clsanchez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\clsanchez\\source\\repos\\abm\\obj\\",
+      "outputPath": "C:\\Users\\clsanchez\\source\\repos\\abm\\abmBackend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iKtz4xZdw80=",
+  "dgSpecHash": "JgA7+hsTaOI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\clsanchez\\source\\repos\\abm\\abm.csproj",
+  "projectFilePath": "C:\\Users\\clsanchez\\source\\repos\\abm\\abmBackend\\abm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\clsanchez\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\clsanchez\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
