@@ -1,0 +1,15 @@
+# Archivos de configuración
+appsettings.json
+appsettings.Development.json
+
+# Carpetas de compilación
+bin/
+obj/
+
+# Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
