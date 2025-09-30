@@ -6,25 +6,28 @@ namespace abm.Services
 {
     public class UsuarioServices
     {
+        //variables de solo lectura, no se pueden modificar
         private readonly AppDbContext _context;
+        private readonly Validators _validators;
 
-        public UsuarioServices(AppDbContext context)
+        public UsuarioServices(AppDbContext context, Validators validators)
         {
             _context = context;
+            _validators = validators;
         }
 
         //metodo para crear nuevo usuario
         public async Task<Usuario> CrearUsuario(Usuario nuevoUsuario)
         {
 
-            Validators.isValidNombreYApellido(nuevoUsuario.nombre, nuevoUsuario.apellido);
+            _validators.isValidNombreYApellido(nuevoUsuario.nombre, nuevoUsuario.apellido);
 
-            if (!Validators.isValidEmail(nuevoUsuario.email))
+            if (!_validators.isValidEmail(nuevoUsuario.email))
             {
                 throw new ArgumentException("El formato de email ingresado no es valido");
             }
 
-            Validators.isValidDni(nuevoUsuario.dni);
+            _validators.isValidDni(nuevoUsuario.dni);
 
             var usuarioExiste = (from user in _context.Usuarios
                                  where user.dni == nuevoUsuario.dni
@@ -35,7 +38,7 @@ namespace abm.Services
                 throw new InvalidOperationException("El Usuario ya está registrado");
             }
 
-            Validators.isValidPassword(nuevoUsuario.password);
+            _validators.isValidPassword(nuevoUsuario.password);
 
             _context.Usuarios.Add(nuevoUsuario);
             await _context.SaveChangesAsync();
