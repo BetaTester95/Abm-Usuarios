@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace abm.validators
 {
-    public class Validators
+    public static class Validators
     {
-        public void isValidNombreYApellido(string nombre, string apellido)
+        public static void isValidNombreYApellido(string nombre, string apellido)
         {
             if (string.IsNullOrEmpty(nombre))
             {
@@ -26,7 +26,7 @@ namespace abm.validators
             }
         }
 
-        public bool isValidEmail(string email)
+        public static bool isValidEmail(string email)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace abm.validators
             }
         }
 
-        public void isValidDni(int dni)
+        public static void isValidDni(int dni)
         {
             string dniString = dni.ToString();
 
@@ -59,7 +59,7 @@ namespace abm.validators
 
             }
         }
-        public void isValidPassword(string password)
+        public static void isValidPassword(string password)
         {
             if (string.IsNullOrEmpty(password))
             {
