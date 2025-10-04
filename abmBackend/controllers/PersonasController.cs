@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using abm.models;
+using abm.validators;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks.Dataflow;
+using abm.Services;
 
 namespace abm.controllers
 {
@@ -6,11 +10,14 @@ namespace abm.controllers
     [Route("api/[controller]")]
     public class PersonasController : ControllerBase
     {
+        private readonly Validators _validators;
+        private readonly UsuarioServices _usuarioServices;
 
-        public IActionResult agregarPersonas()
+        private PersonasController(Validators validators, UsuarioServices usuarioServices)
         {
-
-            return Ok();
+            _validators = validators;
+            _usuarioServices = usuarioServices;
         }
+
     }
 }
