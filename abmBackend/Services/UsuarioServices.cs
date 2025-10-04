@@ -31,8 +31,8 @@ namespace abm.Services
             _validators.isValidDni(nuevoUsuario.dni);
 
             var usuarioExiste = await (from user in _context.Usuarios
-                                 where user.dni == nuevoUsuario.dni
-                                 select user).FirstOrDefaultAsync();
+                                       where user.dni == nuevoUsuario.dni
+                                       select user).FirstOrDefaultAsync();
 
             if (usuarioExiste != null)
             {

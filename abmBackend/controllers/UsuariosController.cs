@@ -12,19 +12,19 @@ namespace abm.controllers
         //agrego el servicio
         private readonly UsuarioServices _usuarioServices;
 
-        public UsuariosController (UsuarioServices usuarioServices)
+        public UsuariosController(UsuarioServices usuarioServices)
         {
             _usuarioServices = usuarioServices;
         }
 
         [HttpPost] //método post
-        public async Task<IActionResult> AgregarUsuario([FromBody] Usuario usuario ) //recibe un json en el cuerpo de la peticion (Postman)
+        public async Task<IActionResult> AgregarUsuario([FromBody] Usuario usuario) //recibe un json en el cuerpo de la peticion (Postman)
         {
             try
             {
                 var (usuarioCreado, mensaje) = await _usuarioServices.CrearUsuario(usuario);
 
-                if(usuarioCreado != null)
+                if (usuarioCreado != null)
                 {
                     return Ok(mensaje);
                 }
@@ -34,7 +34,7 @@ namespace abm.controllers
                 }
 
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
