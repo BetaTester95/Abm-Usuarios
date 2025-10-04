@@ -1,12 +1,13 @@
 ﻿using abm.data;
 using abm.models;
 using abm.validators;
+using Microsoft.EntityFrameworkCore;
 
 namespace abm.Services
 {
-
-    class UsuarioServices
+    public class UsuarioServices
     {
+        //variables de solo lectura, no se pueden modificar
         private readonly AppDbContext _context;
         private readonly Validators _validators;
 
@@ -19,6 +20,8 @@ namespace abm.Services
         //metodo para crear nuevo usuario
         public async Task<Usuario> CrearUsuario(Usuario nuevoUsuario)
         {
+            Validators validator = new Validators();
+
             _validators.isValidNombreYApellido(nuevoUsuario.nombre, nuevoUsuario.apellido);
 
             if (!_validators.isValidEmail(nuevoUsuario.email))
@@ -28,9 +31,9 @@ namespace abm.Services
 
             _validators.isValidDni(nuevoUsuario.dni);
 
-            var usuarioExiste = (from user in _context.Usuarios
+            var usuarioExiste = await (from user in _context.Usuarios
                                  where user.dni == nuevoUsuario.dni
-                                 select user).FirstOrDefault();
+                                 select user).FirstOrDefaultAsync();
 
             if (usuarioExiste != null)
             {
