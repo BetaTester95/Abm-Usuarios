@@ -22,18 +22,21 @@ namespace abm.controllers
         {
             try
             {
-                var usuarioCreado = await _usuarioServices.CrearUsuario(usuario);
-                return Ok(usuarioCreado);
+                var (usuarioCreado, mensaje) = await _usuarioServices.CrearUsuario(usuario);
 
-            }
-            catch(SqlException e)
-            {
-                return StatusCode(503, new { mensaje = "Error de conexión a la base de datos" });
+                if(usuarioCreado != null)
+                {
+                    return Ok(mensaje);
+                }
+                else
+                {
+                    return BadRequest(new { usuario, mensaje });
+                }
+
             }
             catch (Exception e) 
             {
-                return StatusCode(500, new { mensaje = "Error interno del servidor" }); //error que me impide procesar la solicitud
-
+                throw new Exception(e.Message);
             }
 
         }
