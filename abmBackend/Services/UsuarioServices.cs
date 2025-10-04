@@ -1,6 +1,7 @@
 ﻿using abm.data;
 using abm.models;
 using abm.validators;
+using Microsoft.EntityFrameworkCore;
 
 namespace abm.Services
 {
@@ -29,9 +30,9 @@ namespace abm.Services
 
             _validators.isValidDni(nuevoUsuario.dni);
 
-            var usuarioExiste = (from user in _context.Usuarios
+            var usuarioExiste = await (from user in _context.Usuarios
                                  where user.dni == nuevoUsuario.dni
-                                 select user).FirstOrDefault();
+                                 select user).FirstOrDefaultAsync();
 
             if (usuarioExiste != null)
             {
