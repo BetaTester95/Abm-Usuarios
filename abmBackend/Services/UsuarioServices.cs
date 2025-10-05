@@ -20,15 +20,26 @@ namespace abm.Services
         //metodo para crear nuevo usuario
         public async Task<(Usuario, string mensaje)> CrearUsuario(Usuario nuevoUsuario)
         {
+            var mensajeError = string.Empty;
 
-            _validators.isValidNombreYApellido(nuevoUsuario.nombre, nuevoUsuario.apellido);
-
-            if (!_validators.isValidEmail(nuevoUsuario.email))
+            mensajeError = _validators.isValidNombreYApellido(nuevoUsuario.nombre, nuevoUsuario.apellido);
+            if (mensajeError != null)
             {
-                return (null, "El formato de email ingresado no es valido");
+                return (null, mensajeError);
             }
 
-            _validators.isValidDni(nuevoUsuario.dni);
+            mensajeError = _validators.isValidEmail(nuevoUsuario.email);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
+
+
+            mensajeError = _validators.isValidDni(nuevoUsuario.dni);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
 
             var usuarioExiste = await (from user in _context.Usuarios
                                        where user.dni == nuevoUsuario.dni
@@ -39,7 +50,12 @@ namespace abm.Services
                 return (null, "Error! El Usuario ya está registrado");
             }
 
-            _validators.isValidPassword(nuevoUsuario.password);
+            mensajeError = _validators.isValidPassword(nuevoUsuario.password);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
+
 
             _context.Usuarios.Add(nuevoUsuario);
             await _context.SaveChangesAsync();

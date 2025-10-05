@@ -5,80 +5,82 @@ namespace abm.validators
 {
     public class Validators
     {
-        public void isValidNombreYApellido(string nombre, string apellido)
+        public string? isValidNombreYApellido(string nombre, string apellido)
         {
             if (string.IsNullOrEmpty(nombre))
             {
-                throw new ArgumentException("Debe ingresar un nombre");
+                return "Debe ingresar un nombre";
             }
             if (Regex.IsMatch(nombre, @"[0-9]"))
             {
-                throw new ArgumentException("El nombre no puede contener números");
+                return "El nombre no puede contener números";
             }
 
             if (string.IsNullOrEmpty(apellido))
             {
-                throw new ArgumentException("Debe ingresar un apellido");
+                return "Debe ingresar un apellido";
             }
             if (Regex.IsMatch(apellido, @"[0-9]"))
             {
-                throw new ArgumentException("El apellido no puede contener números");
+                return "El apellido no puede contener números";
             }
+
+            return null; // todo valido, no devuelve nada
         }
 
-        public bool isValidEmail(string email)
+        public string? isValidEmail(string email)
         {
-            try
+            var addr = new MailAddress(email);
+            if (addr.Address != email)
             {
-                //uso de la directiva System.net.Mail
-                var addr = new MailAddress(email);
-                return addr.Address == email;
+                return "Atencion! El formato de email ingresado no es válido";
             }
-            catch
-            {
-                return false;
-            }
+            return null;
         }
 
-        public void isValidDni(int dni)
+        public string? isValidDni(int dni)
         {
             string dniString = dni.ToString();
 
             if (string.IsNullOrEmpty(dniString))
-                throw new ArgumentException("El DNI no puede estar vacío");
+                return "El DNI no puede estar vacío";
 
             // Expresión regular para validar solo números
             if (!Regex.IsMatch(dniString, @"^\d+$"))
             {
-                throw new ArgumentException("El DNI debe contener solo números");
+                return "El DNI debe contener solo números";
             }
 
             if (!Regex.IsMatch(dniString, @"^\d{8}$"))
             {
-                throw new ArgumentException("El DNI debe tener 8 dígitos");
+                return "El DNI debe tener 8 dígitos";
 
             }
+
+            return null;
         }
-        public void isValidPassword(string password)
+        public string? isValidPassword(string password)
         {
             if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentException("La contraseña no puede estar vacía");
+                return "La contraseña no puede estar vacía";
             }
 
             //agregamos algunas reestricciones al momento de crear la contraseña
             if (password.Length < 8)
             {
-                throw new ArgumentException("La contraseña debe tener al menos 8 caracteres");
+                return "La contraseña debe tener al menos 8 caracteres";
             }
             if (!Regex.IsMatch(password, @"[0-9]")) 
             {
-                throw new ArgumentException("La contraseña debe contener al menos un número");
+                return "La contraseña debe contener al menos un número";
             }
             if (!Regex.IsMatch(password, @"[A-Z]")) 
             {
-                throw new ArgumentException("La contraseña debe contener al menos una letra mayúscula");
+                return "La contraseña debe contener al menos una letra mayúscula";
             }
+
+            return null;
         }
     }
 }

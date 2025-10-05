@@ -24,15 +24,7 @@ namespace abm.controllers
             {
                 var (usuarioCreado, mensaje) = await _usuarioServices.CrearUsuario(usuario);
 
-                if (usuarioCreado != null)
-                {
                     return Ok(mensaje);
-                }
-                else
-                {
-                    return BadRequest(new { usuario, mensaje });
-                }
-
             }
             catch (Exception e)
             {
