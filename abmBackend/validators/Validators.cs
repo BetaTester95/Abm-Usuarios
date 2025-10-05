@@ -71,11 +71,11 @@ namespace abm.validators
             {
                 return "La contraseña debe tener al menos 8 caracteres";
             }
-            if (!Regex.IsMatch(password, @"[0-9]")) 
+            if (!Regex.IsMatch(password, @"[0-9]"))
             {
                 return "La contraseña debe contener al menos un número";
             }
-            if (!Regex.IsMatch(password, @"[A-Z]")) 
+            if (!Regex.IsMatch(password, @"[A-Z]"))
             {
                 return "La contraseña debe contener al menos una letra mayúscula";
             }
@@ -84,3 +84,4 @@ namespace abm.validators
         }
     }
 }
+

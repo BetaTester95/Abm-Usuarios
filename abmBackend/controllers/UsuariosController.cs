@@ -17,8 +17,9 @@ namespace abm.controllers
             _usuarioServices = usuarioServices;
         }
 
-        [HttpPost] //método post
-        public async Task<IActionResult> AgregarUsuario([FromBody] Usuario usuario) //recibe un json en el cuerpo de la peticion (Postman)
+
+        [HttpPost("crearUsuario")] //método post
+        public async Task<IActionResult> AgregarUsuario([FromBody] Usuario usuario ) //recibe un json en el cuerpo de la peticion (Postman)
         {
             try
             {
@@ -30,7 +31,6 @@ namespace abm.controllers
             {
                 throw new Exception(e.Message);
             }
-
         }
     }
 }
