@@ -20,7 +20,7 @@ namespace abm.Services
         //metodo para crear nuevo usuario
         public async Task<(Usuario, string mensaje)> CrearUsuario(Usuario nuevoUsuario)
         {
-            var mensajeError = string.Empty;
+            string mensajeError;
 
             mensajeError = _validators.isValidNombreYApellido(nuevoUsuario.nombre, nuevoUsuario.apellido);
             if (mensajeError != null)
