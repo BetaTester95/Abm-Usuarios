@@ -3,6 +3,7 @@ using abm.models;
 using abm.validators;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace abm.Services
 {
     public class UsuarioServices
@@ -56,9 +57,12 @@ namespace abm.Services
                 return (null, mensajeError);
             }
 
+            //encriptar la contraseña ingresada por el usuario
+            nuevoUsuario.password = BCrypt.Net.BCrypt.HashPassword(nuevoUsuario.password);
 
             _context.Usuarios.Add(nuevoUsuario);
             await _context.SaveChangesAsync();
+
 
             return (nuevoUsuario, "Usuario creado correctamente");
         }
