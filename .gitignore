@@ -1,6 +1,11 @@
-# Archivos de configuración
+# ============================================
+#   Configuración de .NET y Visual Studio
+# ============================================
+
+# Archivos de configuración locales
 appsettings.json
 appsettings.Development.json
+abmBackend/Properties/launchSettings.json
 
 # Carpetas de compilación
 bin/
@@ -10,6 +15,25 @@ obj/
 .vs/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos temporales
+*.tmp
+*.temp
 
 # Logs
 *.log
+
+# Archivos de publicación o generados automáticamente
+*.publish.xml
+*.pubxml
+*.pubxml.user
+
+# Archivos de respaldo
+*.bak
+*.orig
+
+# ============================================
+#   Fin de configuración
+# ============================================
