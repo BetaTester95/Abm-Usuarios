@@ -32,5 +32,14 @@ namespace abm.controllers
                 throw new Exception(e.Message);
             }
         }
+
+
+        [HttpGet("obtenerUsuarios")]
+        public async Task<IActionResult> ListarUsuarios()
+        {
+            var lista = await _usuarioServices.ObtenerUsuarios();
+
+            return Ok(new { data = lista, Message = _usuarioServices.Message });
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace abm.Services
         //variables de solo lectura, no se pueden modificar
         private readonly AppDbContext _context;
         private readonly Validators _validators;
+        public string Message { get; private set; } = string.Empty;
 
         public UsuarioServices(AppDbContext context, Validators validators)
         {
@@ -61,6 +62,16 @@ namespace abm.Services
             await _context.SaveChangesAsync();
 
             return (nuevoUsuario, "Usuario creado correctamente");
+        }
+
+
+        public async Task<List<Usuario>> ObtenerUsuarios()
+        {
+            var usuarios = await _context.Usuarios.ToListAsync();
+
+            Message = usuarios.Count == 0 ? Message = "No hay usuarios registrados" : Message = "Usuarios encontrados";
+
+            return usuarios;
         }
     }
 }
