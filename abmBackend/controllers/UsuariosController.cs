@@ -38,8 +38,15 @@ namespace abm.controllers
         public async Task<IActionResult> ListarUsuarios()
         {
             var lista = await _usuarioServices.ObtenerUsuarios();
+            return Ok(lista);
+        }
 
-            return Ok(new { data = lista, Message = _usuarioServices.Message });
+        [HttpDelete("eliminarUsuario/{id}")]
+        public async Task<IActionResult> EliminarUsuario(int id)
+        {
+            var resultado = await _usuarioServices.EliminarUsuario(id);
+
+            return Ok(new { Message = resultado });
         }
     }
 }

@@ -77,5 +77,19 @@ namespace abm.Services
 
             return usuarios;
         }
+
+        public async Task<string> EliminarUsuario(int usuarioId)
+        {
+            var usuario = await _context.Usuarios.FindAsync(usuarioId);
+            if (usuario == null)
+            {
+                return "Error! Usuario no encontrado";
+            }
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+            return "Usuario eliminado correctamente";
+        }
+
+
     }
 }
