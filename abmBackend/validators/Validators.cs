@@ -11,18 +11,18 @@ namespace abm.validators
             {
                 return "Debe ingresar un nombre";
             }
-            if (Regex.IsMatch(nombre, @"[0-9]"))
+            if (!Regex.IsMatch(nombre, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$"))
             {
-                return "El nombre no puede contener números";
+                return "El nombre no puede contener números / caracteres especiales";
             }
 
             if (string.IsNullOrEmpty(apellido))
             {
                 return "Debe ingresar un apellido";
             }
-            if (Regex.IsMatch(apellido, @"[0-9]"))
+            if (!Regex.IsMatch(apellido, @"^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$"))
             {
-                return "El apellido no puede contener números";
+                return "El apellido no puede contener números / caracteres especiales";
             }
 
             return null; // todo valido, no devuelve nada
@@ -30,11 +30,11 @@ namespace abm.validators
 
         public string? isValidEmail(string email)
         {
-            var addr = new MailAddress(email);
-            if (addr.Address != email)
+            if(!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                return "Atencion! El formato de email ingresado no es válido";
+                return "Atencion! El formato de email ingresado no es válido";                
             }
+
             return null;
         }
 
