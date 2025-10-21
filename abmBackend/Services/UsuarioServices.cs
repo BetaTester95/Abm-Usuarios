@@ -1,6 +1,7 @@
 ﻿using abm.data;
 using abm.models;
 using abm.validators;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -76,6 +77,23 @@ namespace abm.Services
             Message = usuarios.Count == 0 ? Message = "No hay usuarios registrados" : Message = "Usuarios encontrados";
 
             return usuarios;
+        }
+
+        public async Task<(bool, string mensaje)> EliminarUsuario(int usuarioId)
+        {
+            var usuario = await (from user in _context.Usuarios
+                                 where user.UsuarioId == usuarioId
+                                 select user).FirstOrDefaultAsync();
+
+            if (usuario == null)
+            {
+                return ( false, $" No existe registro del usuario con Id = {usuario.UsuarioId} ");
+            }
+
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+
+            return (true, "usuario eliminado correctamente");
         }
     }
 }

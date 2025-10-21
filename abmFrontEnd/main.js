@@ -1,4 +1,4 @@
-const listUsersContainer = document.getElementById('listUsers'); 
+const listUsersContainer = document.getElementById('listUsers');
 
 
 async function listarUsuarios() {
@@ -18,6 +18,9 @@ async function listarUsuarios() {
                     <td>${user.apellido || 'N/A'}</td>
                     <td>${user.email || 'No disponible'}</td>
                     <td>${user.dni || 'No disponible'}</td>
+                    <td>
+                    <button class="btn btn-danger">Eliminar</button>
+                    </td>
                 </tr>
             `;
     });

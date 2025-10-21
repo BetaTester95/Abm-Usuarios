@@ -41,5 +41,13 @@ namespace abm.controllers
 
             return Ok(new { data = lista, Message = _usuarioServices.Message });
         }
+
+        [HttpDelete("eliminarUsuario/{id}")]
+        public async Task<IActionResult> EliminarUsuario([FromRoute] int id)
+        {
+            var (usuarioAEliminar, mensaje) = await _usuarioServices.EliminarUsuario(id);
+
+            return Ok(mensaje);
+        }
     }
 }
