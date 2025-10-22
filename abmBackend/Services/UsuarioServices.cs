@@ -1,7 +1,6 @@
 ﻿using abm.data;
 using abm.models;
 using abm.validators;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -79,21 +78,18 @@ namespace abm.Services
             return usuarios;
         }
 
-        public async Task<(bool, string mensaje)> EliminarUsuario(int usuarioId)
+        public async Task<string> EliminarUsuario(int usuarioId)
         {
-            var usuario = await (from user in _context.Usuarios
-                                 where user.UsuarioId == usuarioId
-                                 select user).FirstOrDefaultAsync();
-
+            var usuario = await _context.Usuarios.FindAsync(usuarioId);
             if (usuario == null)
             {
-                return ( false, $" No existe registro del usuario con Id = {usuario.UsuarioId} ");
+                return "Error! Usuario no encontrado";
             }
-
             _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
-
-            return (true, "usuario eliminado correctamente");
+            return "Usuario eliminado correctamente";
         }
+
+
     }
 }
