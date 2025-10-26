@@ -33,6 +33,20 @@ namespace abm.controllers
             }
         }
 
+        [HttpPut("editarUsuario/{id}")]
+        public async Task<IActionResult> EditarUsuario(int id, [FromBody] Usuario usuario)
+        {
+            try
+            {
+                var (usuarioEditado, mensaje) = await _usuarioServices.EditarUsuario(id, usuario);
+                return Ok(mensaje);
+            }
+            catch (Exception e) 
+            { 
+                throw new Exception(e.Message);           
+            }
+        }
+
 
         [HttpGet("obtenerUsuarios")]
         public async Task<IActionResult> ListarUsuarios()

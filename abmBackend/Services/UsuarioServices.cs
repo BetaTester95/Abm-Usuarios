@@ -68,6 +68,54 @@ namespace abm.Services
             return (nuevoUsuario, "Usuario creado correctamente");
         }
 
+        public async Task<(Usuario,string mensaje)> EditarUsuario(int usuarioId, Usuario usuarioEditado)
+        {
+            string mensajeError;
+
+            mensajeError = _validators.isValidNombreYApellido(usuarioEditado.nombre, usuarioEditado.apellido);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
+
+            mensajeError = _validators.isValidEmail(usuarioEditado.email);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
+
+
+            mensajeError = _validators.isValidDni(usuarioEditado.dni);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
+
+            mensajeError = _validators.isValidPassword(usuarioEditado.password);
+            if (mensajeError != null)
+            {
+                return (null, mensajeError);
+            }
+
+            //encriptar la contraseña ingresada por el usuario
+            usuarioEditado.password = BCrypt.Net.BCrypt.HashPassword(usuarioEditado.password);
+
+            var usuarioExistente = await _context.Usuarios.FindAsync(usuarioId);
+
+            if(usuarioExistente != null)
+            {
+                usuarioExistente.nombre = usuarioEditado.nombre;
+                usuarioExistente.apellido = usuarioEditado.apellido;
+                usuarioExistente.email = usuarioEditado.email;
+                usuarioExistente.dni = usuarioEditado.dni;
+                usuarioExistente.password = usuarioEditado.password;
+
+                await _context.SaveChangesAsync();
+            }
+
+            return (usuarioEditado, "Usuario Editado correctamente");
+        }
+
 
         public async Task<List<Usuario>> ObtenerUsuarios()
         {
