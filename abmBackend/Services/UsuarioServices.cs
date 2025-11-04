@@ -112,6 +112,10 @@ namespace abm.Services
 
                 await _context.SaveChangesAsync();
             }
+            else
+            {
+                return (null,"Error! No se encontro el usuario");
+            }
 
             return (usuarioEditado, "Usuario Editado correctamente");
         }

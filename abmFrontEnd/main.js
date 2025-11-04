@@ -1,4 +1,9 @@
-const listUsersContainer = document.getElementById('listUsers'); 
+const listUsersContainer = document.getElementById('listUsers');
+const ModalEliminar = document.getElementById('ModalEliminar')
+const ModalCrear = document.getElementById('ModalCrear')
+let usuarioAEliminar = null;
+let modEliminar = new bootstrap.Modal(ModalEliminar);
+let modCrear = new bootstrap.Modal(ModalCrear);
 
 async function listarUsuarios() {
     const response = await fetch('http://localhost:5021/api/usuarios/obtenerUsuarios');
@@ -14,13 +19,67 @@ async function listarUsuarios() {
                     <td>${user.apellido || 'N/A'}</td>
                     <td>${user.email || 'No disponible'}</td>
                     <td>${user.dni || 'No disponible'}</td>
-                    <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-                    <td> <button type="button" class="btn btn-primary">Editar</button></td>
+                    <td><button type="button" class="btn btn-danger" onclick="AbrirModalEliminar(${user.usuarioId})">Eliminar</button></td>
+                    <td> <button type="button" class="btn btn-primary" onclick="EditarUsuario()">Editar</button></td>
                 </tr>
             `;
     });
     listUsersContainer.innerHTML = tableBodyContent;
 }
 
-// DOM
-listarUsuarios()
+async function AbrirModalEliminar(id) {
+    usuarioAEliminar = id;
+
+    const mostrarDatos = document.getElementById("info-usuario")
+    mostrarDatos.textContent = `¿Seguro desea eliminar al usuario de Id = ${usuarioAEliminar}?`;
+
+    modEliminar.show();
+}
+
+async function ConfirmarEliminarUsuario() {
+    const response = await fetch(`http://localhost:5021/api/usuarios/eliminarUsuario/${usuarioAEliminar}`, { method: 'DELETE' });
+    const user = await response.json()
+    console.log('resultado consolelog:', user)
+
+    modEliminar.hide();
+    listarUsuarios();
+}
+
+async function AbrirModalCrear() {
+    document.getElementById('nombre').value = '';
+    document.getElementById('apellido').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('dni').value = '';
+    
+    modCrear.show()
+}
+
+async function AgregarNuevoUsuario() {
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const dni = parseInt(document.getElementById('dni').value);
+
+    const response = await fetch(`http://localhost:5021/api/usuarios/crearUsuario`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nombre: nombre,
+            apellido: apellido,
+            password: password,
+            email: email,
+            dni: dni
+        })
+    });
+    const user = await response.json()
+    console.log('resultado consolelog:', user)
+
+    modCrear.hide();
+    listarUsuarios();
+}
+
+listarUsuarios();

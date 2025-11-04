@@ -1,43 +1,111 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+  <title>Gestion de Usuarios</title>
+</head>
 
-    <div class="container">
-        <table class="table">
-            <button type="button" class="btn btn-primary">Crear</button>
+<body>
+  <h1 class="text-center">Gestión de Usuarios</h1>
 
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Dni</th>
-                </tr>
-            </thead>
-            <tbody class="tablaUsuarios" id="listUsers">
-                <tr>
-                    <td colspan="5" class="text-center" onclick="listarUsuarios()">Presiona el botón para cargar usuarios</td>
-                </tr>
-            </tbody>
-        </table>
+  <div class="container">
+    <table class="table">
+      <button type="button" class="btn btn-primary" onclick="AbrirModalCrear()">Crear</button>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Dni</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="tablaUsuarios" id="listUsers">
+        <tr>
+          <td colspan="5" class="text-center" onclick="listarUsuarios()">Cargando Usuarios...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal" id="ModalEliminar" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar eliminacion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <label id="info-usuario"></label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="ConfirmarEliminarUsuario()">Eliminar</button>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="modal" id="ModalCrear" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Nuevo Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Nombre</label>
+              <input type="text" class="form-control" id="nombre">
+            </div>
+
+            <div class="col-md-6 ms-auto">
+              <label>Apellido</label>
+              <input type="text" class="form-control" id="apellido">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label>Contraseña</label>
+            <input type="text" class="form-control" id="password">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="E-mail" id="email">
+          </div>
+
+          <div class="mb-3">
+            <label>Dni</label>
+            <input type="number" class="form-control" id="dni">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="AgregarNuevoUsuario()">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-  </body>
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>
