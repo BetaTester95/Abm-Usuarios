@@ -54,10 +54,6 @@ async function AbrirModalCrear() {
     document.getElementById('password').value = '';
     document.getElementById('email').value = '';
     document.getElementById('dni').value = '';
-
-    // const etiqueta1 = document.getElementById('error-nombre');
-    // etiqueta1.hidden = false;
-
     modCrear.show()
 }
 
@@ -70,6 +66,13 @@ async function AgregarNuevoUsuario() {
 
     const alertBox = document.getElementById('alert-error');
     alertBox.classList.add('d-none');
+
+    if (!nombre && !apellido && !password && !email && !dni) {
+        alertBox.textContent = 'Es necesario completar los datos';
+        alertBox.classList.remove('d-none');
+        alertBox.classList.replace('alert-danger', 'alert-warning')
+        return;
+    }
 
     const response = await fetch(`http://localhost:5021/api/usuarios/crearUsuario`, {
         method: 'POST',
