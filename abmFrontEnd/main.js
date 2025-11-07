@@ -1,8 +1,11 @@
 const listUsersContainer = document.getElementById('listUsers');
 const ModalEliminar = document.getElementById('ModalEliminar')
 const ModalCrear = document.getElementById('ModalCrear')
-let usuarioAEliminar = null;
+const Toast = document.getElementById('toastError')
+
+
 let modEliminar = new bootstrap.Modal(ModalEliminar);
+let usuarioAEliminar = null;
 let modCrear = new bootstrap.Modal(ModalCrear);
 
 async function listarUsuarios() {
@@ -51,7 +54,10 @@ async function AbrirModalCrear() {
     document.getElementById('password').value = '';
     document.getElementById('email').value = '';
     document.getElementById('dni').value = '';
-    
+
+    // const etiqueta1 = document.getElementById('error-nombre');
+    // etiqueta1.hidden = false;
+
     modCrear.show()
 }
 
@@ -61,6 +67,9 @@ async function AgregarNuevoUsuario() {
     const password = document.getElementById('password').value;
     const email = document.getElementById('email').value;
     const dni = parseInt(document.getElementById('dni').value);
+
+    const alertBox = document.getElementById('alert-error');
+    alertBox.classList.add('d-none');
 
     const response = await fetch(`http://localhost:5021/api/usuarios/crearUsuario`, {
         method: 'POST',
@@ -75,11 +84,19 @@ async function AgregarNuevoUsuario() {
             dni: dni
         })
     });
-    const user = await response.json()
-    console.log('resultado consolelog:', user)
 
-    modCrear.hide();
-    listarUsuarios();
+    const mensaje = await response.text() //devuelve un mensaje de texto
+    console.log('resultado consolelog:', mensaje)
+
+
+    if (mensaje.includes('correctamente')) {
+        modCrear.hide();
+        listarUsuarios();
+    } else {
+        alertBox.textContent = mensaje;
+        alertBox.classList.remove('d-none');
+
+    }
 }
 
 listarUsuarios();

@@ -9,6 +9,8 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
 
   <title>Gestion de Usuarios</title>
 </head>
@@ -70,25 +72,34 @@
               <input type="text" class="form-control" id="nombre">
             </div>
 
-            <div class="col-md-6 ms-auto">
+            <div class="col-md-6 ms-auto mb-4">
               <label>Apellido</label>
               <input type="text" class="form-control" id="apellido">
             </div>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-4">
             <label>Contraseña</label>
             <input type="text" class="form-control" id="password">
           </div>
 
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">@</span>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="E-mail" id="email">
+          <div class="mb-4">
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon1">@</span>
+              <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="E-mail" id="email">
+            </div>
           </div>
+
 
           <div class="mb-3">
             <label>Dni</label>
             <input type="number" class="form-control" id="dni">
+          </div>
+
+          <div class="mb-3">
+            <div class="alert alert-danger d-none d-flex align-items-center" id="alert-error" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            </div>
           </div>
 
         </div>
