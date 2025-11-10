@@ -111,6 +111,59 @@
     </div>
   </div>
 
+ <div class="modal" id="ModalEditar" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Nombre</label>
+              <input type="text" class="form-control" id="nombre-edit">
+            </div>
+
+            <div class="col-md-6 ms-auto mb-4">
+              <label>Apellido</label>
+              <input type="text" class="form-control" id="apellido-edit">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label>Contraseña</label>
+            <input type="text" class="form-control" id="password-edit">
+          </div>
+
+          <div class="mb-4">
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon1">@</span>
+              <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="E-mail" id="email-edit">
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label>Dni</label>
+            <input type="number" class="form-control" id="dni-edit">
+          </div>
+
+          <div class="mb-3">
+            <div class="alert alert-danger d-none d-flex align-items-center" id="alert-edit-error" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="EditarUsuario()">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
